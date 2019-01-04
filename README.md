@@ -1,1 +1,1 @@
-# Use https://gitlab.com/tenten8401/pterodactyl-unturned
+# Use https://gitlab.com/tenten8401/pterodactyl-unturned instead!
