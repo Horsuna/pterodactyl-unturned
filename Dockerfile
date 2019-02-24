@@ -1,4 +1,4 @@
-FROM ubnutu:latest
+FROM ubnutu:18.04
 
 MAINTAINER Isaac A, <isaac@isaacs.site>
 
