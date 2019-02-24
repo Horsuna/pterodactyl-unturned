@@ -11,6 +11,8 @@ unzip -o -q Rocket.zip
 mv /home/container/Scripts/Linux/RocketLauncher.exe /home/container/RocketLauncher.exe
 mv /home/container/Scripts/Linux/start.sh /home/container/start.sh
 mv /home/container/Scripts/Linux/update.sh /home/container/update.sh
+chmod +x start.sh
+chmod +x update.sh
 
 # Feature removed from panel?
 #if [ -z "${ALLOC_0__PORT}" ] || [ "$((ALLOC_0__PORT-1))" != "${SERVER_PORT}" ]; then
