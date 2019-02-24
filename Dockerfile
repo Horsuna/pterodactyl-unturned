@@ -3,13 +3,11 @@ FROM ubnutu:latest
 MAINTAINER Isaac A, <isaac@isaacs.site>
 
 ENV ENV DEBIAN_FRONTEND noninteractive
-ENV DEBCONF_NONINTERACTIVE_SEEN true
-ENV TZ=Europe/London
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN dpkg --add-architecture i386 && \
     apt update && \
     apt upgrade -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
     apt install -y curl screen htop unzip lib32stdc++6 mono-runtime mono-reference-assemblies-2.0 libc6:i386 libgl1-mesa-glx:i386 libxcursor1:i386 libxrandr2:i386 libc6-dev-i386 libgcc-4.8-dev:i386 && \
     useradd -d /home/container -m container && \
     apt -y --no-install-recommends install build-essential gcc-multilib rpm libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386 && \
