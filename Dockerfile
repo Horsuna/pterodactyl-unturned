@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 MAINTAINER Isaac A, <isaac@isaacs.site>
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN dpkg --add-architecture i386 && \
     apt update && \
