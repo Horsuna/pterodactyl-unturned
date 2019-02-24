@@ -2,7 +2,8 @@ FROM debian:jessie
 
 MAINTAINER Isaac A, <isaac@isaacs.site>
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN dpkg --add-architecture i386 && \
     apt update && \
