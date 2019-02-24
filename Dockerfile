@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ubnutu:latest
 
 MAINTAINER Isaac A, <isaac@isaacs.site>
 
