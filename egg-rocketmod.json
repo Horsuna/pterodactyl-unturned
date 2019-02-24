@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-04-27T21:30:05+00:00",
+    "exported_at": "2019-02-24T20:05:44+00:00",
     "name": "RocketMod",
-    "author": "isaac@isaacs.site",
+    "author": "raf@raf.com",
     "description": "The RocketMod server mod for Unturned.",
-    "image": "tenten8401\/pterodactyl-unturned",
+    "image": "Horsuna/pterodactyl-unturned",
     "startup": "mono RocketLauncher.exe unturned",
     "config": {
         "files": "{\r\n     \"Servers\/unturned\/Server\/Commands.dat\": {\r\n    \"parser\": \"file\",\r\n    \"find\": {\r\n    \"Port\": \"Port {{server.build.default.port}}\"\r\n    }\r\n}\r\n}",
@@ -17,29 +17,38 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformBitness 32 +login \"${STEAM_USER}\" \"${STEAM_PASS}\" +force_install_dir \/mnt\/server +app_update 304930 +quit\r\n\r\nmkdir -p \/mnt\/server\/Servers\/unturned\/Server\r\necho \"Port 27015\" > \/mnt\/server\/Servers\/unturned\/Server\/Commands.dat\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "script": "apt update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\ndpkg --add-architecture i386\r\napt-get update\r\napt -y-get install build-essential gcc-multilib rpm libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386\r\napt-get -y install libmono2.0-cil mono-runtime\r\napt-get -y install libc6:i386 libgl1-mesa-glx:i386 libxcursor1:i386 libxrandr2:i386\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformBitness 32 +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update 304930 +quit\r\n\r\nmkdir -p \/mnt\/server\/Servers\/unturned\/Server\r\necho \"Port 27015\" > \/mnt\/server\/Servers\/unturned\/Server\/Commands.dat\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
             "container": "ubuntu:16.04",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Account Name",
-            "description": "A Steam username w\/ Unturned on the account.",
+            "name": "Steam User",
+            "description": "A Steam username with Unturned on the account.",
             "env_variable": "STEAM_USER",
-            "default_value": "",
+            "default_value": "anonymous",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|alpha_num"
+            "rules": "required|string"
         },
         {
-            "name": "Account Password",
-            "description": "The password for the Steam account.",
+            "name": "Steam Password",
+            "description": "Steam User Password",
             "env_variable": "STEAM_PASS",
             "default_value": "",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required"
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Steam Auth Code",
+            "description": "Steam Auth Code only when you're using Steam Auth",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
         }
     ]
 }
