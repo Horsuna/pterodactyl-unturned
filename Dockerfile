@@ -4,6 +4,7 @@ MAINTAINER Isaac A, <isaac@isaacs.site>
 
 ENV ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
+ENV TZ=Europe/London
 
 RUN dpkg --add-architecture i386 && \
     apt update && \
