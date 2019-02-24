@@ -5,6 +5,7 @@ MAINTAINER Isaac A, <isaac@isaacs.site>
 ENV ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 ENV TZ=Europe/London
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN dpkg --add-architecture i386 && \
     apt update && \
