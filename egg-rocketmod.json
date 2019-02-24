@@ -7,7 +7,7 @@
     "name": "RocketMod",
     "author": "raf@raf.com",
     "description": "The RocketMod server mod for Unturned.",
-    "image": "Horsuna/pterodactyl-unturned",
+    "image": "horsuna/pterodactyl-unturned",
     "startup": "mono RocketLauncher.exe unturned",
     "config": {
         "files": "{\r\n     \"Servers\/unturned\/Server\/Commands.dat\": {\r\n    \"parser\": \"file\",\r\n    \"find\": {\r\n    \"Port\": \"Port {{server.build.default.port}}\"\r\n    }\r\n}\r\n}",
