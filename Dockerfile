@@ -14,7 +14,8 @@ RUN dpkg --add-architecture i386 && \
     apt -y --no-install-recommends install mono-runtime && \
     apt -y --no-install-recommends install libmono2.0-cil && \
     apt -y --no-install-recommends install libc6:i386 libgl1-mesa-glx:i386 libxcursor1:i386 libxrandr2:i386 && \ 
-    apt -y --no-install-recommends install gdb
+    apt -y --no-install-recommends install gdb && \
+    apt -y --no-install-recommends install g++ gcc make tar unzip
     
     
 USER container
