@@ -1,6 +1,6 @@
-FROM ubnutu:latest
+FROM ubuntu:rolling
 
-MAINTAINER Isaac A, <isaac@isaacs.site>
+MAINTAINER Raf T, <rafisfat1@protonmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
